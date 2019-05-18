@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pub.basemapper.KcbMapper" >
+  <resultMap id="BaseResultMap" type="pub.po.Kcb" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="KCMC" property="kcmc" jdbcType="VARCHAR" />
+    <result column="KCJJ" property="kcjj" jdbcType="VARCHAR" />
+    <result column="KCZT" property="kczt" jdbcType="INTEGER" />
+    <result column="JSBH" property="jsbh" jdbcType="VARCHAR" />
+    <result column="JSXM" property="jsxm" jdbcType="VARCHAR" />
+    <result column="FJ" property="fj" jdbcType="VARCHAR" />
+    <result column="CSHRQ" property="cshrq" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, KCMC, KCJJ, KCZT, JSBH, JSXM, FJ, CSHRQ
+  </sql>
+  <sql id="queryWhere">
+    <where>
+    <if test="id != null"> 
+      ID = #{id,jdbcType=VARCHAR}
+    </if>
+    <if test="kcmc != null"> 
+      and KCMC = #{kcmc,jdbcType=VARCHAR}
+    </if>
+    <if test="kcjj != null"> 
+      and KCJJ = #{kcjj,jdbcType=VARCHAR}
+    </if>
+    <if test="kczt != null"> 
+      and KCZT = #{kczt,jdbcType=INTEGER}
+    </if>
+    <if test="jsbh != null"> 
+      and JSBH = #{jsbh,jdbcType=VARCHAR}
+    </if>
+    <if test="jsxm != null"> 
+      and JSXM = #{jsxm,jdbcType=VARCHAR}
+    </if>
+    <if test="fj != null"> 
+      and FJ = #{fj,jdbcType=VARCHAR}
+    </if>
+    <if test="cshrq != null"> 
+      and CSHRQ = #{cshrq,jdbcType=BIGINT}
+    </if>
+    </where>
+  </sql> 
+  <insert id="insert" parameterType="pub.po.Kcb" >
+    insert into kcb(<include refid="Base_Column_List" />)
+    values(
+        #{id,jdbcType=VARCHAR}
+        ,#{kcmc,jdbcType=VARCHAR}
+        ,#{kcjj,jdbcType=VARCHAR}
+        ,#{kczt,jdbcType=INTEGER}
+        ,#{jsbh,jdbcType=VARCHAR}
+        ,#{jsxm,jdbcType=VARCHAR}
+        ,#{fj,jdbcType=VARCHAR}
+        ,#{cshrq,jdbcType=BIGINT}
+        )
+    <selectKey resultType="java.lang.String" order="AFTER" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="pub.po.Kcb" >
+    insert into kcb
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test = "id != null">
+          ID
+        </if>
+        <if test = "kcmc != null">
+          ,KCMC
+        </if>
+        <if test = "kcjj != null">
+          ,KCJJ
+        </if>
+        <if test = "kczt != null">
+          ,KCZT
+        </if>
+        <if test = "jsbh != null">
+          ,JSBH
+        </if>
+        <if test = "jsxm != null">
+          ,JSXM
+        </if>
+        <if test = "fj != null">
+          ,FJ
+        </if>
+        <if test = "cshrq != null">
+          ,CSHRQ
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <if test = "id != null">
+          #{id,jdbcType=VARCHAR}
+        </if>
+        <if test = "kcmc != null">
+          ,#{kcmc,jdbcType=VARCHAR}
+        </if>
+        <if test = "kcjj != null">
+          ,#{kcjj,jdbcType=VARCHAR}
+        </if>
+        <if test = "kczt != null">
+          ,#{kczt,jdbcType=INTEGER}
+        </if>
+        <if test = "jsbh != null">
+          ,#{jsbh,jdbcType=VARCHAR}
+        </if>
+        <if test = "jsxm != null">
+          ,#{jsxm,jdbcType=VARCHAR}
+        </if>
+        <if test = "fj != null">
+          ,#{fj,jdbcType=VARCHAR}
+        </if>
+        <if test = "cshrq != null">
+          ,#{cshrq,jdbcType=BIGINT}
+        </if>
+     </trim>
+	   <selectKey resultType="java.lang.String" order="AFTER" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+  </insert>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from kcb
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from kcb
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="queryByExists" parameterType="pub.po.Kcb" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" /> 
+    from Kcb
+    <include refid="queryWhere"/> 
+  </select> 
+ 
+  <update id="updateByPrimaryKeySelective" parameterType="pub.po.Kcb"> 
+    update Kcb
+     set
+        <if test = "kcmc != null">
+        KCMC = #{kcmc,jdbcType=VARCHAR}
+        </if>
+        <if test = "kcjj != null">
+        ,KCJJ = #{kcjj,jdbcType=VARCHAR}
+        </if>
+        <if test = "kczt != null">
+        ,KCZT = #{kczt,jdbcType=INTEGER}
+        </if>
+        <if test = "jsbh != null">
+        ,JSBH = #{jsbh,jdbcType=VARCHAR}
+        </if>
+        <if test = "jsxm != null">
+        ,JSXM = #{jsxm,jdbcType=VARCHAR}
+        </if>
+        <if test = "fj != null">
+        ,FJ = #{fj,jdbcType=VARCHAR}
+        </if>
+        <if test = "cshrq != null">
+        ,CSHRQ = #{cshrq,jdbcType=BIGINT}
+        </if>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update> 
+  <update id="updateByPrimaryKey" parameterType="pub.po.Kcb"> 
+    update Kcb
+     set
+              KCMC = #{kcmc,jdbcType=VARCHAR}
+        ,      KCJJ = #{kcjj,jdbcType=VARCHAR}
+        ,      KCZT = #{kczt,jdbcType=INTEGER}
+        ,      JSBH = #{jsbh,jdbcType=VARCHAR}
+        ,      JSXM = #{jsxm,jdbcType=VARCHAR}
+        ,      FJ = #{fj,jdbcType=VARCHAR}
+        ,      CSHRQ = #{cshrq,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update> 
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<generatorConfiguration>
+    <context id="DB2Tables" targetRuntime="MyBatis">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/assistant?useUnicode=true&amp;characterEncoding=utf8" userId="root" password="mysql">
+        </jdbcConnection>
+        <javaModelGenerator targetPackage="pub.po" targetProject="src">
+        </javaModelGenerator>
+        <sqlMapGenerator targetPackage="pub.basemapper" targetProject="src">
+        </sqlMapGenerator>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="pub.basemapper" targetProject="src">
+        </javaClientGenerator>      
+        <table tableName="kcb" domainObjectName="Kcb" annotation="false"></table> 
+        <table tableName="zjb" domainObjectName="Zjb" annotation="false"></table> 
+
+    </context>
+</generatorConfiguration>

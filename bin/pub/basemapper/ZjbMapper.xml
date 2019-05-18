@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pub.basemapper.ZjbMapper" >
+  <resultMap id="BaseResultMap" type="pub.po.Zjb" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="ZJMC" property="zjmc" jdbcType="VARCHAR" />
+    <result column="ZJJJ" property="zjjj" jdbcType="VARCHAR" />
+    <result column="KCBH" property="kcbh" jdbcType="VARCHAR" />
+    <result column="CSHRQ" property="cshrq" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ZJMC, ZJJJ, KCBH, CSHRQ
+  </sql>
+  <sql id="queryWhere">
+    <where>
+    <if test="id != null"> 
+      ID = #{id,jdbcType=VARCHAR}
+    </if>
+    <if test="zjmc != null"> 
+      and ZJMC = #{zjmc,jdbcType=VARCHAR}
+    </if>
+    <if test="zjjj != null"> 
+      and ZJJJ = #{zjjj,jdbcType=VARCHAR}
+    </if>
+    <if test="kcbh != null"> 
+      and KCBH = #{kcbh,jdbcType=VARCHAR}
+    </if>
+    <if test="cshrq != null"> 
+      and CSHRQ = #{cshrq,jdbcType=VARCHAR}
+    </if>
+    </where>
+  </sql> 
+  <insert id="insert" parameterType="pub.po.Zjb" >
+    insert into zjb(<include refid="Base_Column_List" />)
+    values(
+        #{id,jdbcType=VARCHAR}
+        ,#{zjmc,jdbcType=VARCHAR}
+        ,#{zjjj,jdbcType=VARCHAR}
+        ,#{kcbh,jdbcType=VARCHAR}
+        ,#{cshrq,jdbcType=VARCHAR}
+        )
+    <selectKey resultType="java.lang.String" order="AFTER" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="pub.po.Zjb" >
+    insert into zjb
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test = "id != null">
+          ID
+        </if>
+        <if test = "zjmc != null">
+          ,ZJMC
+        </if>
+        <if test = "zjjj != null">
+          ,ZJJJ
+        </if>
+        <if test = "kcbh != null">
+          ,KCBH
+        </if>
+        <if test = "cshrq != null">
+          ,CSHRQ
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <if test = "id != null">
+          #{id,jdbcType=VARCHAR}
+        </if>
+        <if test = "zjmc != null">
+          ,#{zjmc,jdbcType=VARCHAR}
+        </if>
+        <if test = "zjjj != null">
+          ,#{zjjj,jdbcType=VARCHAR}
+        </if>
+        <if test = "kcbh != null">
+          ,#{kcbh,jdbcType=VARCHAR}
+        </if>
+        <if test = "cshrq != null">
+          ,#{cshrq,jdbcType=VARCHAR}
+        </if>
+     </trim>
+	   <selectKey resultType="java.lang.String" order="AFTER" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+  </insert>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from zjb
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from zjb
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="queryByExists" parameterType="pub.po.Zjb" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" /> 
+    from Zjb
+    <include refid="queryWhere"/> 
+  </select> 
+ 
+  <update id="updateByPrimaryKeySelective" parameterType="pub.po.Zjb"> 
+    update Zjb
+     set
+        <if test = "zjmc != null">
+        ZJMC = #{zjmc,jdbcType=VARCHAR}
+        </if>
+        <if test = "zjjj != null">
+        ,ZJJJ = #{zjjj,jdbcType=VARCHAR}
+        </if>
+        <if test = "kcbh != null">
+        ,KCBH = #{kcbh,jdbcType=VARCHAR}
+        </if>
+        <if test = "cshrq != null">
+        ,CSHRQ = #{cshrq,jdbcType=VARCHAR}
+        </if>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update> 
+  <update id="updateByPrimaryKey" parameterType="pub.po.Zjb"> 
+    update Zjb
+     set
+              ZJMC = #{zjmc,jdbcType=VARCHAR}
+        ,      ZJJJ = #{zjjj,jdbcType=VARCHAR}
+        ,      KCBH = #{kcbh,jdbcType=VARCHAR}
+        ,      CSHRQ = #{cshrq,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update> 
+</mapper>
